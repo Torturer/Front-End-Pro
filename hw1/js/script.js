@@ -32,16 +32,6 @@ orangeSum = Operation(orangePrice, orangeCount, orangeSalePercent, `down`);
 kiwiSum = Operation(kiwiPrice, kiwiCount, kiwiCountryPercent, `up`);
 finalSum = appleSum + orangeSum + kiwiSum
 
-console.log(`
-----------
-Результат вычислений: 
-Общая цена за киви со скидкой - ${kiwiSum}
-Общая цена за апельсины со скидкой - ${orangeSum}
-Общая цена за яблоки со скидкой - ${appleSum}
-Всего за весь товар - ${finalSum}
-----------
-`)
-
 document.write(`
 
 <section class="main">
@@ -84,7 +74,7 @@ document.write(`
             <td>$${kiwiSum}</td>
         </tr>
 
-        <tr>
+        <tr class="final-sum">
             <td colspan="6">Final sum: $${finalSum}</td>
         </tr>
     </table>
