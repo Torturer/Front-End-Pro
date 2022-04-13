@@ -1,0 +1,19 @@
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info {
+    font-weight: bold;
+    font-size: 18px;
+    color: darkolivegreen;
+    &-warn {
+        color: red;
+    }
+}
+
+
+
