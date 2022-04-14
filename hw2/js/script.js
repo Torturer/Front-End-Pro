@@ -51,6 +51,9 @@ if (!UserBirthYear) {
     UserBirthYear = 1997;
 } else {
     UserBirthYear = parseInt(UserBirthYear.replaceAll(` `, ``));
+    if (isNaN(UserBirthYear)) {
+        UserBirthYear = 1997;
+    }
 }
 UserAge = new Date().getFullYear() - UserBirthYear;
 
