@@ -6,7 +6,11 @@ maxRandomNumber = FixeRandomNumber(EnterNumber(`Please enter maximal number`, mi
 
 for(i=0, sum = 0; i < arr.length; i++){
     arr[i] = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber) + minRandomNumber);
-    sum+= arr[i]
+    if (i == 0) {
+        sum += arr[i];
+        continue;
+    }
+    sum*= arr[i]
 }
 
 console.log (arr);
@@ -23,7 +27,7 @@ function EnterNumber(text, min, max) {
 
 function FixeSizeArray(number) {
     if (number < 0) number = Math.abs(number); // никогда не сработает при проверке в строке номер 5, но по условию тз написал)
-    if (!Number.isInteger(number)) number = Math.round(number, 0);
+    if (!Number.isInteger(number)) number = Math.round(number);
     return number;
 }
 
