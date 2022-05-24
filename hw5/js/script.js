@@ -26,7 +26,7 @@ function EnterNumber(text, min, max) {
 }
 
 function FixeSizeArray(number) {
-    if (number < 0) number = Math.abs(number); // никогда не сработает при проверке в строке номер 5, но по условию тз написал)
+    if (number < 0) number = Math.abs(number); // никогда не сработает при проверке в строке номер 24, но по условию тз написал)
     if (!Number.isInteger(number)) number = Math.round(number);
     return number;
 }
