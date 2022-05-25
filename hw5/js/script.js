@@ -22,8 +22,7 @@ function EnterNumber(text, min, max) {
     do {
         variable = +prompt(text + ` "${min}" - "${max}"`)
     } while (!variable || typeof variable != `number` || variable < min || variable > max)
-    if (!Number.isInteger(variable)) return Math.round(variable);
-    return variable;
+    return !Number.isInteger(variable) ? Math.round(variable) : variable;
 }
 
 //#endregion
@@ -48,7 +47,7 @@ function EnterNumber(text, min, max) {
 // console.log (arr);
 // console.log (sum);
 
-// //#region Functions 
+// //#region Functions
 
 // function EnterNumber(text, min, max) {
 //     do {
@@ -58,7 +57,7 @@ function EnterNumber(text, min, max) {
 // }
 
 // function FixeSizeArray(number) {
-//     if (number < 0) number = Math.abs(number); // никогда не сработает при проверке и входных данных в строке номер 56, но по условию тз написал)
+//     if (number < 0) number = Math.abs(number); // никогда не сработает при проверке и входных данных в строке номер 55, но по условию тз написал)
 //     if (!Number.isInteger(number)) number = Math.round(number);
 //     return number;
 // }
