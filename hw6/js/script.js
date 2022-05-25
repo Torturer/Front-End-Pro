@@ -13,7 +13,7 @@ document.write(`
 <div class="container">
 `)
 
-for (i = 0; i < rainbow.length; i++) {
+for(i = 0; i < rainbow.length; i++) {
     document.write(`
         <div class="box">
             <div class="box-bullet" style="background-color: ${RandomRGB()}"></div>
@@ -30,8 +30,7 @@ document.write(`
 //#region Functions
 
 function RandomRGB() {
-    str = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
-    return str;
+    return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
 }
 
 //#endregion
