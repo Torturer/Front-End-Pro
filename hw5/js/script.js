@@ -4,12 +4,8 @@ arr.length = EnterNumber(`Pleas enter size array`, 2, 10)
 minRandomNumber = EnterNumber(`Please enter minimal number`, -10, 10);
 maxRandomNumber = EnterNumber(`Please enter maximal number`, minRandomNumber, 50);
 
-for (i = 0, sum = 0; i < arr.length; i++) {
+for (i = 0, sum = 1; i < arr.length; i++) {
     arr[i] = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber) + minRandomNumber);
-    if (i == 0) {
-        sum += arr[i];
-        continue;
-    }
     sum *= arr[i]
 }
 
