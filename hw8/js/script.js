@@ -34,7 +34,7 @@ document.write(`
 function arrTransform(arr, name) {
     let newArr = [];
     newArr.push(`<table>
-    <caption>${name}</caption>
+    <caption>${name} info</caption>
     <tbody>
     <tr>`);
     for (i = 0; i < arr.length; i++) {
