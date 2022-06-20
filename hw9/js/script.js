@@ -20,13 +20,7 @@ function getPrice(arr, seasonFunc) {
     for (let i = 0; i < newArr.length; i++) {
         let newCurrentItem = newArr[i];
         for (let a = 0; a < newCurrentItem.length; a++) {
-            if (newCurrentItem.indexOf(newCurrentItem[a]) === 1) {
-                if (typeof seasonFunc === `function`) {
-                    sum += seasonFunc(newCurrentItem[a])
-                } else {
-                    sum += newCurrentItem[a]
-                }
-            }
+            if (newCurrentItem.indexOf(newCurrentItem[a]) === 1) { typeof seasonFunc === `function` ? sum += seasonFunc(newCurrentItem[a]) : sum += newCurrentItem[a]; }
         }
     }
     return sum
