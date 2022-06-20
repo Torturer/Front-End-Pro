@@ -19,12 +19,13 @@ function getPrice(arr, seasonFunc) {
     let sum = 0;
     for (let i = 0; i < newArr.length; i++) {
         let newCurrentItem = newArr[i];
-        if (Array.isArray(newCurrentItem)) {
-        } else if (typeof newCurrentItem === `number`) {
-            if (typeof seasonFunc === `function`) {
-                sum += seasonFunc(newCurrentItem);
-            } else {
-                sum += newCurrentItem;
+        for (let a = 0; a < newCurrentItem.length; a++) {
+            if (newCurrentItem.indexOf(newCurrentItem[a]) === 1) {
+                if (typeof seasonFunc === `function`) {
+                    sum += seasonFunc(newCurrentItem[a])
+                } else {
+                    sum += newCurrentItem[a]
+                }
             }
         }
     }
@@ -36,7 +37,7 @@ function copyArr(arr) {
     for (let i = 0; i < arr.length; i++) {
         let newCurrentItem = arr[i];
         if (Array.isArray(newCurrentItem)) {
-            newArr.push(getPrice(newCurrentItem));
+            newArr.push(copyArr(newCurrentItem));
         } else { newArr.push(newCurrentItem); }
     }
     return newArr
