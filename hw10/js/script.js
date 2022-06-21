@@ -13,9 +13,6 @@ let firstArr = [];
 users
     .forEach(function (item) {
         firstArr.push(item[0] + `!`);
-        if (item[1] === `red`) {
-            score += item[2]
-        }
     })
 let secondArr = users
     .map(function (item) {
@@ -25,6 +22,7 @@ let secondArr = users
 let table = users
     .filter(item => { return item[1] === `red` })
     .map(user => {
+        score += user[2]
         return `<tr>${user
             .map(item => `<td>${Array.isArray(item) ? item.join(`; `) : item}</td>`).join(``)}</tr>`
     }).join(``)
