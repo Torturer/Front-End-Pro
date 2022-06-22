@@ -4,16 +4,17 @@ String.prototype.capitalize = function () {
 }
 
 Array.prototype.renderList = function () {
-    return this.map(item => {
-        if (typeof item === `object`) {
-            let timeArr = [];
-            for (key in item) {
-                timeArr.push(`${key.capitalize()}: ${item[key]}. `);
+    return this
+        .map(item => {
+            if (typeof item === `object`) {
+                let timeArr = [];
+                for (key in item) {
+                    timeArr.push(`${key.capitalize()}: ${item[key]}. `);
+                }
+                return `<li>${timeArr.join(``)}</li>`;
             }
-            return `<li>${timeArr.join(``)}</li>`;
-        }
-        return `<li>${item}</li>`
-    }).join(``);
+            return `<li>${item}</li>`
+        }).join(``);
 }
 //#endregion
 
