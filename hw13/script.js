@@ -158,12 +158,6 @@ class User {
 	};
 }
 
-let classContainer = {
-	student: obj => new Student(obj),
-	admin: obj => new Admin(obj),
-	lector: obj => new Lector(obj)
-}
-
 class Student extends User {
 	constructor(obj) {
 		super(obj);
@@ -210,6 +204,12 @@ class Admin extends User {
 	};
 }
 
+let classContainer = {
+	student: obj => new Student(obj),
+	admin: obj => new Admin(obj),
+	lector: obj => new Lector(obj)
+}
+
 /////////
 
 users = users
@@ -226,6 +226,4 @@ for (let key in users) {
 document.write(`
 <div class="users">
 ${allUserRenderList.join(``)}
-</div>
-
-`)
+</div>`)
