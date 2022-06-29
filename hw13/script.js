@@ -124,15 +124,10 @@ class User {
 	render() { return ` <div class="user"> ${this.rederUserInfo()} ${this.courses && this.renderCourse()} </div> ` };
 
 	renderCourse() {
-		let finalRender = [`<div class="user__courses">`]
+		let finalRender = this.courses 
+		    .map(obj => ` <p class="user__courses--course ${this.role}">${obj.title} <span class="${this.getScoreLevel(obj.mark)}">${this.getScoreLevel(obj.mark)}</span></p> `)
 
-		finalRender.push(this.courses
-			.map(obj => {
-				return `<p class="user__courses--course ${this.role}">${obj.title} <span class="${this.getScoreLevel(obj.mark)}">${this.getScoreLevel(obj.mark)}</span></p>`})
-			.join(``))
-
-		finalRender.push(`</div>`);
-		return finalRender.join(``);
+		return ` <div class="user__courses">  ${finalRender.join(``)} </div> `;
 	};
 
 	rederUserInfo() {
@@ -164,17 +159,14 @@ class Lector extends User {
 	}
 
 	renderCourse() {
-		let finalRender = [`<div class="user__courses admin--info">`]
-		finalRender.push(this.courses
+		let finalRender = this.courses
 			.map(obj => `                
 			<div class="user__courses--course lector">
 			<p>Title: <b>${obj.title}</b></p>
 			<p>Lector's score: <span class="${this.getScoreLevel(obj.score)}">${this.getScoreLevel(obj.score)}</span></p>
 			<p>Average student's score: <span class="${this.getScoreLevel(obj.studentsScore)}">${this.getScoreLevel(obj.studentsScore)}</span></p>
 		    </div>`)
-			.join(``));
-		finalRender.push(`</div>`);
-		return finalRender.join(``);
+		return ` <div class="user__courses admin--info">  ${finalRender.join(``)} </div> `;
 	};
 }
 
@@ -184,17 +176,14 @@ class Admin extends User {
 	}
 
 	renderCourse() {
-		let finalRender = [`<div class="user__courses admin--info">`]
-		finalRender.push(this.courses
+		let finalRender = this.courses
 			.map(obj => `                
 			<div class="user__courses--course admin">
 			<p>Title: <b>${obj.title}</b></p>
 			<p>Admin's score: <span class="${this.getScoreLevel(obj.score)}">${this.getScoreLevel(obj.score)}</span></p>
 			<p>Lector: <b>${obj.lector}</b></p>
 		    </div>`)
-			.join(``));
-		finalRender.push(`</div>`);
-		return finalRender.join(``);
+		return ` <div class="user__courses admin--info">  ${finalRender.join(``)} </div> `;
 	};
 }
 
