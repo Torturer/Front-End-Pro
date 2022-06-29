@@ -127,19 +127,18 @@ class User {
 
 	rederUserInfo() {
 		return `<div class="user__info">
-		<div class="user__info--data">
-			<img src="images/users/${this.img}.png" alt="${this.name}" height="50">
-			<div class="user__naming">
-			  <p>Name: <b>${this.name}</b></p>
-			  <p>Age: <b>${this.age}</b></p>
-			</div>
-		</div>
-		<div class="user__info--role student">
-			<img src="images/roles/${this.role}.png" alt="${this.role}" height="25">
-			<p>${this.role}</p>
-		</div>
-        </div>`
-	};
+		            <div class="user__info--data">
+			            <img src="images/users/${this.img}.png" alt="${this.name}" height="50">
+			            <div class="user__naming">
+			                <p>Name: <b>${this.name}</b></p>
+			                <p>Age: <b>${this.age}</b></p>
+			            </div>
+		            </div>
+		            <div class="user__info--role student">
+			        <img src="images/roles/${this.role}.png" alt="${this.role}" height="25">
+			        <p>${this.role}</p>
+		            </div>
+                </div>`};
 }
 
 class Student extends User {
