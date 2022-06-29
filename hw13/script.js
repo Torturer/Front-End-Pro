@@ -6,7 +6,7 @@ const gradation = {
 };
 
 
-let users = [
+const users = [
 	{
 		name: "Jack Smith",
 		age: 23,
@@ -204,26 +204,17 @@ class Admin extends User {
 	};
 }
 
-let classContainer = {
+const classContainer = {
 	student: obj => new Student(obj),
 	admin: obj => new Admin(obj),
 	lector: obj => new Lector(obj)
 }
 
 /////////
-
-users = users
-	.map(item => {
-		return classContainer[item.role](item);
-	})
-
 let allUserRenderList = [];
-for (let key in users) {
 
-	allUserRenderList.push(users[key].render())
-}
+users
+	.map(item => classContainer[item.role](item))
+	.forEach(obj => allUserRenderList.push(obj.render()))
 
-document.write(`
-<div class="users">
-${allUserRenderList.join(``)}
-</div>`)
+document.write(`  <div class="users">  ${allUserRenderList.join(``)}  </div>  `)
