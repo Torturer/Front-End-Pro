@@ -66,30 +66,24 @@ class Hamburger {
 	}
 
 	getPrice() {
-		let sum = 0;
-		function findPrice(obj) {
-			for (let key in obj) {
-				let tempObj = obj[key]
-				if (typeof tempObj === `object`) {
-					findPrice(tempObj);
-				} else if (key === `price`) { sum += tempObj };
-			}
-		}
-		findPrice(this);
-		return sum
+		return this.findNumber(`price`)
 	}
 
 	getCalories() {
+		return this.findNumber(`calories`)
+	}
+
+	findNumber(str) {
 		let sum = 0;
-		function find(obj) {
+		function findCalories(obj) {
 			for (let key in obj) {
 				let tempObj = obj[key]
 				if (typeof tempObj === `object`) {
-					find(tempObj);
-				} else if (key === `calories`) { sum += tempObj };
+					findCalories(tempObj);
+				} else if (key === str) { sum += tempObj };
 			}
 		}
-		find(this);
+		findCalories(this);
 		return sum
 	}
 }
@@ -98,3 +92,4 @@ let newBurg = new Hamburger();
 console.log(newBurg)
 console.log(`Price: ${newBurg.getPrice()}`);
 console.log(`Calories: ${newBurg.getCalories()}`);
+
