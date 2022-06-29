@@ -121,17 +121,11 @@ class User {
 		return level
 	}
 
-	render() {
-		let finalRender = [`<div class="user">`];
-		finalRender.push(this.rederUserInfo());
-		this.courses && finalRender.push(this.renderCourse());
-		finalRender.push(`</div>`)
-		return finalRender.join(``)
-	};
+	render() { return ` <div class="user"> ${this.rederUserInfo()} ${this.courses && this.renderCourse()} </div> ` };
 
 	renderCourse() {
 		let finalRender = [`<div class="user__courses">`]
-		
+
 		finalRender.push(this.courses
 			.map(obj => {
 				return `<p class="user__courses--course ${this.role}">${obj.title} <span class="${this.getScoreLevel(obj.mark)}">${this.getScoreLevel(obj.mark)}</span></p>`})
