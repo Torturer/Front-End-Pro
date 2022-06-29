@@ -130,13 +130,13 @@ class User {
 	};
 
 	renderCourse() {
-		debugger;
 		let finalRender = [`<div class="user__courses">`]
+		
 		finalRender.push(this.courses
 			.map(obj => {
-				return `<p class="user__courses--course ${this.role}">${obj.title} <span class="${this.getScoreLevel(obj.mark)}">${this.getScoreLevel(obj.mark)}</span></p>`
-			})
+				return `<p class="user__courses--course ${this.role}">${obj.title} <span class="${this.getScoreLevel(obj.mark)}">${this.getScoreLevel(obj.mark)}</span></p>`})
 			.join(``))
+
 		finalRender.push(`</div>`);
 		return finalRender.join(``);
 	};
@@ -214,7 +214,7 @@ const classContainer = {
 let allUserRenderList = [];
 
 users
-	.map(item => classContainer[item.role](item))
+	.map(item => classContainer[item.role] ? classContainer[item.role](item) : new User(item))
 	.forEach(obj => allUserRenderList.push(obj.render()))
 
 document.write(`  <div class="users">  ${allUserRenderList.join(``)}  </div>  `)
