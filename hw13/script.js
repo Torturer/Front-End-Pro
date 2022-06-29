@@ -4,8 +4,6 @@ const gradation = {
 	85: "very-good",
 	100: "excellent"
 };
-
-
 const users = [
 	{
 		name: "Jack Smith",
@@ -97,9 +95,6 @@ const users = [
 		]
 	}
 ];
-
-/////////
-
 class User {
 	constructor(obj) {
 		for (let item in obj) {
@@ -194,10 +189,7 @@ const classContainer = {
 }
 
 /////////
-let allUserRenderList = [];
-
-users
-	.map(item => classContainer[item.role] ? classContainer[item.role](item) : new User(item))
-	.forEach(obj => allUserRenderList.push(obj.render()))
+let allUserRenderList = users.map( item => classContainer[item.role] ? classContainer[item.role](item) : new User(item) )
+allUserRenderList.forEach(obj => allUserRenderList.push(obj.render()))
 
 document.write(`  <div class="users">  ${allUserRenderList.join(``)}  </div>  `)
