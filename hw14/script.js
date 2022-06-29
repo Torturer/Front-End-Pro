@@ -75,15 +75,15 @@ class Hamburger {
 
 	findNumber(str) {
 		let sum = 0;
-		function findCalories(obj) {
+		function find(obj) {
 			for (let key in obj) {
 				let tempObj = obj[key]
 				if (typeof tempObj === `object`) {
-					findCalories(tempObj);
+					find(tempObj);
 				} else if (key === str) { sum += tempObj };
 			}
 		}
-		findCalories(this);
+		find(this);
 		return sum
 	}
 }
