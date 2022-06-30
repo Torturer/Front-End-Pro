@@ -47,10 +47,6 @@ class Order {
 		this.setOrder()
 	}
 
-	getKeys(kategory) {
-		return Object.keys(kategory)
-	}
-
 	setOrder() {
 		for (let kategory in HAMBURGER) {
 			let kategoryArr = Object.keys(HAMBURGER[kategory])
