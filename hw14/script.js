@@ -35,61 +35,66 @@ const HAMBURGER = {
 	}
 }
 
-class Hamburger {
-	constructor() {
-		this.setSize(),
-			this.setTopings(),
-			this.setSupplements()
-	}
-
-	setSize() {
-		this.sizeBurg = {};
-		let { sizeBurg: { small, big } } = HAMBURGER;
-		if (confirm(`Хотите большую булочку? Если нет мы сделаем маленькую.`)) {
-			this.sizeBurg.big = big
-		} else { this.sizeBurg.small = small }
-	}
-
-	setTopings() {
-		this.toppings = {};
-		for (let topping in HAMBURGER.toppings) {
-			if (confirm(`Do you want ${topping}`)) { this.toppings[topping] = HAMBURGER.toppings[topping] }
-		}
-	}
-
-	setSupplements() {
-		this.supplements = {};
-		let { supplements: { seasoning, mayonnaise } } = HAMBURGER;
-		if (confirm(`Хотите попробовать наш фирменный соус? Если нет, тогда добавим майонез`)) {
-			this.supplements.seasoning = seasoning
-		} else { this.supplements.mayonnaise = mayonnaise }
-	}
-
-	getPrice() {
-		return this.findNumber(`price`)
-	}
-
-	getCalories() {
-		return this.findNumber(`calories`)
-	}
-
-	findNumber(str) {
-		let sum = 0;
-		function find(obj) {
-			for (let key in obj) {
-				let tempObj = obj[key]
-				if (typeof tempObj === `object`) {
-					find(tempObj);
-				} else if (key === str) { sum += tempObj };
-			}
-		}
-		find(this);
-		return sum
-	}
+String.prototype.capitalize = function () {
+	return this[0].toUpperCase() + this.slice(1).toLowerCase();
 }
 
-let newBurg = new Hamburger();
-console.log(newBurg)
-console.log(`Price: ${newBurg.getPrice()}`);
-console.log(`Calories: ${newBurg.getCalories()}`);
 
+class Order {
+	constructor(place) {
+		this.place = place
+		this.ingredients = {}
+		this.setOrder()
+	}
+
+	getKeys(kategory) {
+		return Object.keys(kategory)
+	}
+
+	setOrder() {
+		for (let kategory in HAMBURGER) {
+			let kategoryArr = Object.keys(HAMBURGER[kategory])
+
+			do {
+				var item = prompt(`Please choos ingredients for ${kategory}: ${kategoryArr.join(`, `)}.`, kategoryArr[0])
+				if (item) {
+					item = item.replaceAll(` `, ``).toLowerCase()
+				}
+			} while (!kategoryArr.includes(item))
+
+			this.ingredients[item] = HAMBURGER[kategory][item]
+		}
+	}
+
+	get price() {
+		let price = 0;
+		for(let ingredient in this.ingredients) {
+			price += this.ingredients[ingredient].price
+		}
+		return price
+	}
+
+	get calories() {
+		let calories = 0;
+		for(let ingredient in this.ingredients) {
+			calories += this.ingredients[ingredient].calories
+		}
+		return calories
+	}
+
+	renderIngredientsOrder() {
+		let arr = [`Ingredients:\n\n`]
+		for(let ingredient in this.ingredients) {
+			arr.push(`  ${ingredient.capitalize()} \n\n`)
+		}
+		return arr.join(``)
+	}
+
+	get order () {
+		return `Order for #${this.place} \n\n ${this.renderIngredientsOrder()} \n\n\n Total price: $${this.price.toFixed(2)} \n\n Total calories: ${this.calories}kka`
+	}
+
+}
+
+let hamb = new Order(2)
+console.log(hamb.order)
