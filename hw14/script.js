@@ -50,9 +50,10 @@ class Order {
 	setOrder() {
 		for (let kategory in HAMBURGER) {
 			let kategoryArr = Object.keys(HAMBURGER[kategory])
+			let item;
 
 			do {
-				var item = prompt(`Please choos ingredients for ${kategory}: ${kategoryArr.join(`, `)}.`, kategoryArr[0])
+				item = prompt(`Please choos ingredients for ${kategory}: ${kategoryArr.join(`, `)}.`, kategoryArr[0])
 				if (item) {
 					item = item.replaceAll(` `, ``).toLowerCase()
 				}
