@@ -13,6 +13,7 @@ setInterval(() => {
 setInterval(() => {
     square.style.top = randomPX(window.innerHeight)
     square.style.left = randomPX(window.innerWidth)
+    square.style.borderRadius = randomPX(150)
 }, 1000)
 
 const randomPX = (temp) => `${Math.floor(Math.random() * (temp-100))}px`
