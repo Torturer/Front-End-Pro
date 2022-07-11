@@ -24,34 +24,6 @@ const menu = [
     }
 ];
 
-
-// const render = (arr) => {
-//     let tabLink = [`<div class="tab-panel">`];
-//     let tabInfo = [];
-
-//     arr.forEach(obj => {
-//         tabLink.push(`<div class="tab-link ${obj.first ? `active fix` : ``}" data-tabKey="${obj.tab}">${obj.tab}</div>`)
-
-//         tabInfo.push(`
-//         <div class="tab-info ${obj.first ? `active` : ``}" data-tabKey="${obj.tab}">
-//             <img src="img/phone-${obj.icon}.jpg" alt="${obj.title}">
-//             <div class="tab-info-view">
-//                 <img src="img/${obj.icon}.png" alt="icon">
-//                 <div class="tittle">${obj.title}</div>
-//                 <div class="description">${obj.description}</div>
-//             </div>
-//         </div>
-//         `)
-
-//     })
-
-//     tabLink.push(`</div>`)
-
-//     return tabLink.concat(tabInfo).join(``)
-// }
-
-// document.write(render(menu))
-
 const body = document.querySelector(`body`);
 
 let tabLink = document.createElement(`div`);
@@ -81,7 +53,7 @@ menu.forEach(obj => {
 
         e.target.classList.add(`fix`, `active`)
     })
-    
+
     temp.addEventListener(`mouseover`, e => { !e.target.classList.contains(`fix`) && e.target.classList.add(`active`) })
     temp.addEventListener(`mouseout`, e => { !e.target.classList.contains(`fix`) && e.target.classList.remove(`active`) })
 
@@ -101,25 +73,3 @@ menu.forEach(obj => {
                         </div>`
     body.append(tabInfo);
 })
-
-
-
-// tabsLink.forEach(a => {
-    // a.addEventListener(`click`, e => {
-    //     tabsLink.forEach(a => {
-    //         a.classList.remove(`active`, `fix`)
-    //     })
-    //     e.target.classList.add(`fix`, `active`)
-
-    //     tabsInformation.forEach(tab => {
-    //         console.log(tab.getAttribute(`data-tabKey`))
-    //         if (tab.getAttribute(`data-tabKey`) === e.target.getAttribute(`data-tabKey`)) {
-    //             tab.classList.add(`active`);
-    //         } else { tab.classList.remove(`active`) }
-
-
-    //     })
-    // })
-    // a.addEventListener(`mouseover`, e => { !a.classList.contains(`fix`) && a.classList.add(`active`) })
-    // a.addEventListener(`mouseout`, e => { !a.classList.contains(`fix`) && a.classList.remove(`active`) })
-// })
