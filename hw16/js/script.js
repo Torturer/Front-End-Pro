@@ -43,12 +43,9 @@ menu.forEach(obj => {
             a.classList.remove(`fix`, `active`)
         })
         tabsInformation.forEach(tab => {
-            console.log(tab.getAttribute(`data-tabKey`))
             if (tab.getAttribute(`data-tabKey`) === e.target.getAttribute(`data-tabKey`)) {
                 tab.classList.add(`active`);
             } else { tab.classList.remove(`active`) }
-
-
         })
 
         e.target.classList.add(`fix`, `active`)
