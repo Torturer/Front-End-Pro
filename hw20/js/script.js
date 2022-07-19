@@ -60,7 +60,8 @@ myPromise
             do {
                 value = prompt(`Введите сумму которую вы хотите снять. Не менее ${bankData[valute].min} ${valute} и не больее чем ${bankData[valute].max} ${valute}`)
             } while (!value);
-            if (value > bankData[valute].max || value > userData[valute]) return Promise.reject(`Недопустимая сумма снятия. Максимальная сумма снятия ${bankData[valute].max}${valute}`)
+            if (value > userData[valute]) return Promise.reject(`Недопустимая сумма снятия. Недостаточно денег на балансе. Ваш баланс: ${userData[valute]}${valute}`)
+            if (value > bankData[valute].max) return Promise.reject(`Недопустимая сумма снятия. Максимальная сумма снятия ${bankData[valute].max}${valute}`)
             if (value < bankData[valute].min) return Promise.reject(`Недопустимая сумма снятия. Минимальная сумма снятия ${bankData[valute].min}${valute}`)
             console.log(`Вы успешно сняли ${value}${valute} ${bankData[valute].img}`)
         }
