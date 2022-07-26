@@ -45,18 +45,18 @@ const renderComponent = (obj, value) => {
     heroesTable.append(bodyTable)
 }
 
-const getHero = async () => {
+const getHeroes = async () => {
     try {
         heroes = await controller(API)
         heroes.forEach(element => renderComponent(element))
-    } catch (x) { }
+    } catch { }
 }
 
 const removeHero = async (id) => {
     try {
         await controller(API + `/${id}`, `DELETE`)
         document.querySelector(`tr[data-id="${id}"]`).remove()
-    } catch (x) { }
+    } catch { }
 }
 
 const setFavourite = async (id, set) => {
@@ -64,14 +64,20 @@ const setFavourite = async (id, set) => {
         let findHero = heroes.find(e => e.id === id)
         findHero.favourite = set
         controller(API + `/${id}`, `PUT`, findHero)
-    } catch (x) { }
+    } catch { }
 }
+
+const checkHero = async (obj) => {
+    heroes = await controller(API);
+    return heroes.find(x => x.name === obj.name) ? Promise.reject(`Такой персонаж уже существует`) : Promise.resolve() 
+} 
 
 const addHero = async (obj) => {
     try {
+        await checkHero(obj);
         let succesHero = await controller(API, `POST`, obj);
         renderComponent(succesHero);
-    } catch (x) { }
+    } catch (err) { console.log(err) }
 }
 
 let form = document.querySelector(`#heroesForm`);
@@ -87,8 +93,9 @@ form.addEventListener(`submit`, e => {
         comics: heroComics.value,
         favourite: heroFavourite.checked
     }
+    
 
     addHero(hero)
 })
 
-getHero()
+getHeroes()
