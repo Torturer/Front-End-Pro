@@ -20,63 +20,63 @@ const controller = async (url, method = `GET`, obj) => {
 }
 
 const getUniverses = async () => {
+
     try {
         let universe = await controller(API_UNIVERSE);
         renderUniverses(universe)
     } catch { }
-}
+},
+    getHeroes = async () => {
 
+        try {
+            heroes = await controller(API)
+            heroes.forEach(element => renderComponent(element))
+        } catch { }
+    },
+    removeHero = async (id) => {
 
-const getHeroes = async () => {
-    try {
-        heroes = await controller(API)
-        heroes.forEach(element => renderComponent(element))
-    } catch { }
-}
+        try {
+            await controller(API + `/${id}`, `DELETE`)
+            document.querySelector(`tr[data-id="${id}"]`).remove()
+        } catch { }
+    },
+    setFavourite = async (id, set) => {
 
-const removeHero = async (id) => {
-    try {
-        await controller(API + `/${id}`, `DELETE`)
-        document.querySelector(`tr[data-id="${id}"]`).remove()
-    } catch { }
-}
+        try {
+            let findHero = heroes.find(e => e.id === id)
+            findHero.favourite = set
+            controller(API + `/${id}`, `PUT`, findHero)
+        } catch { }
+    },
+    checkHero = async (obj) => {
 
-const setFavourite = async (id, set) => {
-    try {
-        let findHero = heroes.find(e => e.id === id)
-        findHero.favourite = set
-        controller(API + `/${id}`, `PUT`, findHero)
-    } catch { }
-}
+        heroes = await controller(API);
+        if (heroes.find(x => x.name === obj.name)) throw `Такой персонаж уже существует`
+    },
+    addHero = async (obj) => {
 
-const checkHero = async (obj) => {
-    heroes = await controller(API);
-    return heroes.find(x => x.name === obj.name) ? Promise.reject(`Такой персонаж уже существует`) : Promise.resolve()
-}
-
-const addHero = async (obj) => {
-    try {
-        await checkHero(obj);
-        let succesHero = await controller(API, `POST`, obj);
-        renderComponent(succesHero);
-    } catch (err) { console.log(err) }
-}
+        try {
+            await checkHero(obj);
+            let succesHero = await controller(API, `POST`, obj);
+            renderComponent(succesHero);
+        } catch (err) { console.log(err) }
+    }
 
 const renderComponent = (obj) => {
     let heroesTable = document.querySelector(`#heroesTable`),
         bodyTable = document.createElement(`tbody`),
         componentTable = document.createElement(`tr`)
 
-    componentTable.setAttribute(`data-id`, obj.id)
+    componentTable.setAttribute(`data-id`, obj.id);
 
-    componentTable.innerHTML = `    <td>${obj.name}</td>
-                                        <td>${obj.comics}</td>
-                                        <td>
-                                            <label class="heroFavouriteInput">
-                                            Favourite: <input type="checkbox" data-id="${obj.id}" ${obj.favourite ? `checked` : ``}>
-                                            </label>
-                                        </td>
-                                        <td><button data-id="${obj.id}">Delete</button></td>`
+    componentTable.innerHTML = `<td>${obj.name}</td>
+                                <td>${obj.comics}</td>
+                                <td>
+                                    <label class="heroFavouriteInput">
+                                    Favourite: <input type="checkbox" data-id="${obj.id}" ${obj.favourite ? `checked` : ``}>
+                                    </label>
+                                </td>
+                                <td><button data-id="${obj.id}">Delete</button></td>`;
 
     bodyTable.append(componentTable)
 
@@ -93,13 +93,13 @@ const renderUniverses = (foo) => {
     let form = document.querySelector(`#heroesForm`),
         heroComics = document.querySelector(`select[data-name="heroComics"]`)
 
-    foo.forEach( item => {
+    foo.forEach(item => {
         let optionComics = document.createElement(`option`)
-            
+
         optionComics.value = item.name
         optionComics.innerHTML = item.name
         heroComics.append(optionComics)
-    } )
+    })
 
     form.addEventListener(`submit`, e => {
         e.preventDefault();
@@ -117,7 +117,6 @@ const renderUniverses = (foo) => {
         addHero(hero)
     })
 }
-
 
 getUniverses()
 getHeroes()
