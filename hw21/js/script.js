@@ -1,4 +1,5 @@
 const API = `https://61c9d37520ac1c0017ed8eac.mockapi.io/heroes`;
+const API_UNIVERSE = `https://61c9d37520ac1c0017ed8eac.mockapi.io/universes`;
 let heroes;
 
 
@@ -18,7 +19,50 @@ const controller = async (url, method = `GET`, obj) => {
     return respons.ok ? respons.json() : Promise.reject(respons.status);
 }
 
-const renderComponent = (obj, value) => {
+const getUniverses = async () => {
+    try {
+        let universe = await controller(API_UNIVERSE);
+        renderUniverses(universe)
+    } catch { }
+}
+
+
+const getHeroes = async () => {
+    try {
+        heroes = await controller(API)
+        heroes.forEach(element => renderComponent(element))
+    } catch { }
+}
+
+const removeHero = async (id) => {
+    try {
+        await controller(API + `/${id}`, `DELETE`)
+        document.querySelector(`tr[data-id="${id}"]`).remove()
+    } catch { }
+}
+
+const setFavourite = async (id, set) => {
+    try {
+        let findHero = heroes.find(e => e.id === id)
+        findHero.favourite = set
+        controller(API + `/${id}`, `PUT`, findHero)
+    } catch { }
+}
+
+const checkHero = async (obj) => {
+    heroes = await controller(API);
+    return heroes.find(x => x.name === obj.name) ? Promise.reject(`Такой персонаж уже существует`) : Promise.resolve()
+}
+
+const addHero = async (obj) => {
+    try {
+        await checkHero(obj);
+        let succesHero = await controller(API, `POST`, obj);
+        renderComponent(succesHero);
+    } catch (err) { console.log(err) }
+}
+
+const renderComponent = (obj) => {
     let heroesTable = document.querySelector(`#heroesTable`),
         bodyTable = document.createElement(`tbody`),
         componentTable = document.createElement(`tr`)
@@ -45,57 +89,35 @@ const renderComponent = (obj, value) => {
     heroesTable.append(bodyTable)
 }
 
-const getHeroes = async () => {
-    try {
-        heroes = await controller(API)
-        heroes.forEach(element => renderComponent(element))
-    } catch { }
+const renderUniverses = (foo) => {
+    let form = document.querySelector(`#heroesForm`),
+        heroComics = document.querySelector(`select[data-name="heroComics"]`)
+
+    foo.forEach( item => {
+        let optionComics = document.createElement(`option`)
+            
+        optionComics.value = item.name
+        optionComics.innerHTML = item.name
+        heroComics.append(optionComics)
+    } )
+
+    form.addEventListener(`submit`, e => {
+        e.preventDefault();
+
+        let heroName = form.querySelector(`input[data-name="heroName"]`),
+            heroComics = form.querySelector(`select[data-name="heroComics"]`),
+            heroFavourite = form.querySelector(`input[data-name="heroFavourite"]`)
+
+        let hero = {
+            name: heroName.value,
+            comics: heroComics.value,
+            favourite: heroFavourite.checked
+        }
+
+        addHero(hero)
+    })
 }
 
-const removeHero = async (id) => {
-    try {
-        await controller(API + `/${id}`, `DELETE`)
-        document.querySelector(`tr[data-id="${id}"]`).remove()
-    } catch { }
-}
 
-const setFavourite = async (id, set) => {
-    try {
-        let findHero = heroes.find(e => e.id === id)
-        findHero.favourite = set
-        controller(API + `/${id}`, `PUT`, findHero)
-    } catch { }
-}
-
-const checkHero = async (obj) => {
-    heroes = await controller(API);
-    return heroes.find(x => x.name === obj.name) ? Promise.reject(`Такой персонаж уже существует`) : Promise.resolve() 
-} 
-
-const addHero = async (obj) => {
-    try {
-        await checkHero(obj);
-        let succesHero = await controller(API, `POST`, obj);
-        renderComponent(succesHero);
-    } catch (err) { console.log(err) }
-}
-
-let form = document.querySelector(`#heroesForm`);
-form.addEventListener(`submit`, e => {
-    e.preventDefault();
-
-    let heroName = form.querySelector(`input[data-name="heroName"]`),
-        heroComics = form.querySelector(`select[data-name="heroComics"]`),
-        heroFavourite = form.querySelector(`input[data-name="heroFavourite"]`)
-
-    let hero = {
-        name: heroName.value,
-        comics: heroComics.value,
-        favourite: heroFavourite.checked
-    }
-    
-
-    addHero(hero)
-})
-
+getUniverses()
 getHeroes()
