@@ -25,42 +25,47 @@ const getUniverses = async () => {
         let universe = await controller(API_UNIVERSE);
         renderUniverses(universe)
     } catch { }
-},
-    getHeroes = async () => {
+}
 
-        try {
-            heroes = await controller(API)
-            heroes.forEach(element => renderComponent(element))
-        } catch { }
-    },
-    removeHero = async (id) => {
+const getHeroes = async () => {
 
-        try {
-            await controller(API + `/${id}`, `DELETE`)
-            document.querySelector(`tr[data-id="${id}"]`).remove()
-        } catch { }
-    },
-    setFavourite = async (id, set) => {
+    try {
+        heroes = await controller(API)
+        heroes.forEach(element => renderComponent(element))
+    } catch { }
+}
 
-        try {
-            let findHero = heroes.find(e => e.id === id)
-            findHero.favourite = set
-            controller(API + `/${id}`, `PUT`, findHero)
-        } catch { }
-    },
-    checkHero = async (obj) => {
+const removeHero = async (id) => {
 
-        heroes = await controller(API);
-        if (heroes.find(x => x.name === obj.name)) throw `Такой персонаж уже существует`
-    },
-    addHero = async (obj) => {
+    try {
+        await controller(API + `/${id}`, `DELETE`)
+        document.querySelector(`tr[data-id="${id}"]`).remove()
+    } catch { }
+}
 
-        try {
-            await checkHero(obj);
-            let succesHero = await controller(API, `POST`, obj);
-            renderComponent(succesHero);
-        } catch (err) { console.log(err) }
-    }
+const setFavourite = async (id, set) => {
+
+    try {
+        let findHero = heroes.find(e => e.id === id)
+        findHero.favourite = set
+        controller(API + `/${id}`, `PUT`, findHero)
+    } catch { }
+}
+
+const checkHero = async (obj) => {
+
+    heroes = await controller(API);
+    if (heroes.find(x => x.name === obj.name)) throw `Такой персонаж уже существует`
+}
+
+const addHero = async (obj) => {
+
+    try {
+        await checkHero(obj);
+        let succesHero = await controller(API, `POST`, obj);
+        renderComponent(succesHero);
+    } catch (err) { console.log(err) }
+}
 
 const renderComponent = (obj) => {
     let heroesTable = document.querySelector(`#heroesTable`),
