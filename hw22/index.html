@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Lesson 30</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
+
 <body>
 
     <fieldset>
@@ -18,13 +20,7 @@
             </label>
             <label>
                 <span>Participants:</span>
-                <select id="taskParticipants" multiple required>
-                    <option value="1">Oleg</option>
-                    <option value="2" disabled>Anna</option>
-                    <option value="3">Jack</option>
-                    <option value="4" disabled>Taras</option>
-                    <option value="5">Olesya</option>
-                </select>
+                <select id="taskParticipants" multiple required></select>
             </label>
             <button>Create task</button>
         </form>
@@ -42,85 +38,17 @@
             </tr>
         <tbody>
             <tr>
-                <td id="ToDo">
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Start doing</button>
-                    </div>
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Jack, Taras</p>
-                        <button>Start doing</button>
-                    </div>
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Olesya</p>
-                        <button>Start doing</button>
-                    </div>
-                </td>
-                <td id="InProgress">
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Need testing</button>
-                    </div>
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Need testing</button>
-                    </div>
-                </td>
-                <td id="NeedTesting">
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Start testing</button>
-                    </div>
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Start testing</button>
-                    </div>
-                </td>
-                <td id="Testing">
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Reopen</button>
-                        <button>Done</button>
-                    </div>
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Reopen</button>
-                        <button>Done</button>
-                    </div>
-                </td>
-                <td id="Reopened">
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Restart</button>
-                    </div>
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                        <button>Restart</button>
-                    </div>
-                </td>
-                <td id="Done">
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                    </div>
-                    <div class="card">
-                        <h3>Task title</h3>
-                        <p>Participants: Anna, Oleg</p>
-                    </div>
-                </td>
+                <td id="ToDo"></td>
+                <td id="InProgress"></td>
+                <td id="NeedTesting"></td>
+                <td id="Testing"></td>
+                <td id="Reopened"></td>
+                <td id="Done"></td>
             </tr>
         </tbody>
     </table>
+
+    <script src="js/script.js" type="module"></script>
 </body>
+
 </html>
